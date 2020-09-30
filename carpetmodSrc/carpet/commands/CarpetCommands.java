@@ -44,5 +44,12 @@ public class CarpetCommands {
         // ----- RSMM Start ----- //
         handler.registerCommand(new MeterCommand(CarpetServer.rsmmServer));
         // ----- RSMM End ----- //
+
+        /** Hippogriff SMP */
+
+        handler.registerCommand(new CommandGateway());
+        handler.registerCommand(new CommandLocation());
+        handler.registerCommand(new CommandCenter());
+        handler.registerCommand(new CommandHelper());
     }
 }

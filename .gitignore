@@ -48,3 +48,5 @@ whitelist.json
 /carpet/
 /buildSrc/out/
 /run/
+/7za.exe
+/server_test/

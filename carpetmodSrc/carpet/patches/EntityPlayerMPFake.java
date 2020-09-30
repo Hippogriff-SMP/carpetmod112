@@ -40,9 +40,11 @@ public class EntityPlayerMPFake extends EntityPlayerMP
         PlayerInteractionManager interactionManagerIn = new PlayerInteractionManager(worldIn);
         GameProfile gameprofile = server.getPlayerProfileCache().getGameProfileForUsername(username);
         if (gameprofile == null) {
+            System.out.println("* GameProfile is null!");
             UUID uuid = EntityPlayer.getUUID(new GameProfile((UUID)null, username));
             gameprofile = new GameProfile(uuid, username);
-        }else {
+            System.out.println("* GameProfile is created as offline mode!");
+        } else {
             gameprofile = fixSkin(gameprofile);
         }
         EntityPlayerMPFake instance = new EntityPlayerMPFake(server, worldIn, gameprofile, interactionManagerIn);

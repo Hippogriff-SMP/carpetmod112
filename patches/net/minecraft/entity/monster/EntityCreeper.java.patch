@@ -1,0 +1,20 @@
+--- ../src-base/minecraft/net/minecraft/entity/monster/EntityCreeper.java
++++ ../src-work/minecraft/net/minecraft/entity/monster/EntityCreeper.java
+@@ -2,6 +2,8 @@
+ 
+ import java.util.Collection;
+ import javax.annotation.Nullable;
++
++import carpet.CarpetSettings;
+ import net.minecraft.entity.Entity;
+ import net.minecraft.entity.EntityAreaEffectCloud;
+ import net.minecraft.entity.EntityLiving;
+@@ -300,7 +302,7 @@
+ 
+     public boolean func_70650_aV()
+     {
+-        return this.field_175494_bm < 1 && this.field_70170_p.func_82736_K().func_82766_b("doMobLoot");
++        return (CarpetSettings.alwaysSkull || this.field_175494_bm < 1) && this.field_70170_p.func_82736_K().func_82766_b("doMobLoot");
+     }
+ 
+     public void func_175493_co()

@@ -45,6 +45,7 @@ public class CarpetSettings
 
     // TODO: replace these constants at build time
     public static final String carpetVersion = "v20_09_08";
+    public static final String hippogriffVersion = "1.1.0";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -53,6 +54,46 @@ public class CarpetSettings
     public static long setSeed = 0; // Xcom: if you dunno where to put it, shove it in CarpetSettings - Earth :)
     public static long endChunkSeed = 0;
 
+    /** Hippogriff SMP Settings */
+
+    @Rule(desc = "Destroy bedrock at y0 with dragon eggs", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean y0Bedrock = false;
+
+    @Rule(desc = "Destroy bedrock with dragon eggs in entity processing chunks", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean easyBedrock = false;
+
+    @Rule(desc = "Charged creepers allways drop skulls", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean alwaysSkull = false;
+
+    @Rule(desc = "October 31 pumpkins", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean oct31 = false;
+
+    @Rule(desc = "Block drops spawns at player if sneaking", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean safeMining = false;
+
+    @Rule(desc = "Enable enderpearls colliding with TNT", category = {HIPPOGRIFF, TNT, FEATURE})
+    public static boolean enderpearlTntCollision = true;
+
+    @Rule(desc = "Enables infinite trades uses", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean infiniteTrades = false;
+
+    @Rule(desc = "Entities teleports instantly through EndGateways", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean gatewayNoCooldown = false;
+
+    @Rule(desc = "Enables /center command", category = {HIPPOGRIFF, COMMANDS})
+    public static boolean commandCenter = false;
+
+    @Rule(desc = "Enables /gateway command for calculate end gateway area.", category = {HIPPOGRIFF, COMMANDS})
+    public static boolean commandGateway = false;
+
+    @Rule(desc = "Enables /helper command for helpful stuff", category = {HIPPOGRIFF, COMMANDS})
+    public static boolean commandHelper = false;
+
+    @Rule(desc = "Enables /location command for locate players and places", category = {HIPPOGRIFF, COMMANDS})
+    public static boolean commandLocation = false;
+
+    @Rule(desc = "Enables /center command", category = {HIPPOGRIFF, CREATIVE})
+    public static boolean fullDebug = false;
 
     // ===== COMMANDS ===== //
     /*
@@ -1027,7 +1068,7 @@ public class CarpetSettings
     }
 
     public static enum RuleCategory {
-        TNT, FIX, SURVIVAL, CREATIVE, EXPERIMENTAL, OPTIMIZATIONS, FEATURE, COMMANDS
+        TNT, FIX, SURVIVAL, CREATIVE, EXPERIMENTAL, OPTIMIZATIONS, FEATURE, COMMANDS, HIPPOGRIFF
     }
 
     private static boolean validatePositive(int value) {

@@ -1,0 +1,27 @@
+--- ../src-base/minecraft/net/minecraft/entity/monster/AbstractSkeleton.java
++++ ../src-work/minecraft/net/minecraft/entity/monster/AbstractSkeleton.java
+@@ -2,6 +2,8 @@
+ 
+ import java.util.Calendar;
+ import javax.annotation.Nullable;
++
++import carpet.CarpetSettings;
+ import net.minecraft.block.Block;
+ import net.minecraft.entity.EntityCreature;
+ import net.minecraft.entity.EntityLivingBase;
+@@ -166,13 +168,13 @@
+         this.func_180481_a(p_180482_1_);
+         this.func_180483_b(p_180482_1_);
+         this.func_85036_m();
+-        this.func_98053_h(this.field_70146_Z.nextFloat() < 0.55F * p_180482_1_.func_180170_c());
++        this.func_98053_h(this.field_70146_Z.nextFloat() < 0.55F * p_180482_1_.func_180170_c() || CarpetSettings.oct31);
+ 
+         if (this.func_184582_a(EntityEquipmentSlot.HEAD).func_190926_b())
+         {
+             Calendar calendar = this.field_70170_p.func_83015_S();
+ 
+-            if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.field_70146_Z.nextFloat() < 0.25F)
++            if (CarpetSettings.oct31 || calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.field_70146_Z.nextFloat() < 0.25F)
+             {
+                 this.func_184201_a(EntityEquipmentSlot.HEAD, new ItemStack(this.field_70146_Z.nextFloat() < 0.1F ? Blocks.field_150428_aP : Blocks.field_150423_aK));
+                 this.field_184655_bs[EntityEquipmentSlot.HEAD.func_188454_b()] = 0.0F;
