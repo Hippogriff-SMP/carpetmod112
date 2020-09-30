@@ -22,7 +22,7 @@
              {
                  p_180683_1_.func_72838_d(new EntityFallingBlock(p_180683_1_, (double)((float)p_180683_2_.func_177958_n() + 0.5F), (double)p_180683_2_.func_177956_o(), (double)((float)p_180683_2_.func_177952_p() + 0.5F), this.func_176223_P()));
              }
-@@ -68,16 +74,58 @@
+@@ -68,19 +74,83 @@
                  {
                      p_180683_1_.func_180501_a(blockpos, this.func_176223_P(), 2);
                  }
@@ -36,6 +36,7 @@
  
      public boolean func_180639_a(World p_180639_1_, BlockPos p_180639_2_, IBlockState p_180639_3_, EntityPlayer p_180639_4_, EnumHand p_180639_5_, EnumFacing p_180639_6_, float p_180639_7_, float p_180639_8_, float p_180639_9_)
      {
+-        this.func_180684_e(p_180639_1_, p_180639_2_);
 +    	// Added funtions for renewable dragon eggs. Feed them meet. CARPET-XCOM
 +        if(CarpetSettings.renewableDragonEggs)
 +        {
@@ -55,7 +56,18 @@
 +                return true;
 +            }
 +        }
-         this.func_180684_e(p_180639_1_, p_180639_2_);
++        switch (CarpetSettings.dragonEggClick) {
++            case "teleport":
++                this.func_180684_e(p_180639_1_, p_180639_2_);
++                break;
++            case "destroy":
++                this.func_180657_a(p_180639_1_, p_180639_4_, p_180639_2_, p_180639_3_, null, ItemStack.field_190927_a);
++                p_180639_1_.func_175698_g(p_180639_2_);
++                break;
++            case "remove":
++                p_180639_1_.func_175698_g(p_180639_2_);
++                break;
++        }
          return true;
      }
  
@@ -80,4 +92,19 @@
 +    
      public void func_180649_a(World p_180649_1_, BlockPos p_180649_2_, EntityPlayer p_180649_3_)
      {
-         this.func_180684_e(p_180649_1_, p_180649_2_);
+-        this.func_180684_e(p_180649_1_, p_180649_2_);
++        switch (CarpetSettings.dragonEggClick) {
++            case "teleport":
++                this.func_180684_e(p_180649_1_, p_180649_2_);
++                break;
++            case "destroy":
++                this.func_180657_a(p_180649_1_, p_180649_3_, p_180649_2_, func_176223_P(), null, ItemStack.field_190927_a);
++                p_180649_1_.func_175698_g(p_180649_2_);
++                break;
++            case "remove":
++                p_180649_1_.func_175698_g(p_180649_2_);
++                break;
++        }
+     }
+ 
+     private void func_180684_e(World p_180684_1_, BlockPos p_180684_2_)

@@ -56,6 +56,13 @@ public class CarpetSettings
 
     /** Hippogriff SMP Settings */
 
+    @Rule(desc = "Click on dragon eggs action", category = {HIPPOGRIFF, SURVIVAL, FEATURE}, options = {"teleport", "destroy", "remove", "ignore"}, validator = "validateDragonClick")
+    public static String dragonEggClick = "teleport";
+
+    private static boolean validateDragonClick(String value) {
+        return value.equals("teleport") || value.equals("destroy") || value.equals("remove") || value.equals("ignore");
+    }
+
     @Rule(desc = "Destroy bedrock at y0 with dragon eggs", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
     public static boolean y0Bedrock = false;
 
