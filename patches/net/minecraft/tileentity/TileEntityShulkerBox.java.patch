@@ -53,6 +53,15 @@
          if (p_145842_1_ == 1)
          {
              this.field_190598_h = p_145842_2_;
+@@ -349,7 +365,7 @@
+ 
+     public boolean func_180462_a(int p_180462_1_, ItemStack p_180462_2_, EnumFacing p_180462_3_)
+     {
+-        return !(Block.func_149634_a(p_180462_2_.func_77973_b()) instanceof BlockShulkerBox);
++        return !(Block.func_149634_a(p_180462_2_.func_77973_b()) instanceof BlockShulkerBox) || CarpetSettings.shulkerInShulker;
+     }
+ 
+     public boolean func_180461_b(int p_180461_1_, ItemStack p_180461_2_, EnumFacing p_180461_3_)
 @@ -409,4 +425,14 @@
          OPENED,
          CLOSING;

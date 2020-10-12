@@ -27,15 +27,22 @@
          }
  
          return enumactionresult;
-@@ -207,6 +212,8 @@
+@@ -207,12 +212,14 @@
  
      public int func_77976_d()
      {
-+        // Allows players to stack empty shulkerboxes in there inventorys CARPET-XCOM
-+        if(CarpetSettings.stackableShulkersPlayerInventory && CarpetServer.playerInventoryStacking && !func_77942_o() && this.func_77973_b() instanceof ItemShulkerBox) return 64;
++        // Allows players to stack empty shulkerboxes in there inventorys CARPET-XCOM & Hippogriff SMP AllStackable
++        if(CarpetSettings.stackableShulkersPlayerInventory && CarpetServer.playerInventoryStacking && !func_77942_o() && this.func_77973_b() instanceof ItemShulkerBox) return CarpetSettings.allStackable == 0 ? 64 : CarpetSettings.allStackable;
          return this.func_77973_b().func_77639_j();
      }
  
+     public boolean func_77985_e()
+     {
+-        return this.func_77976_d() > 1 && (!this.func_77984_f() || !this.func_77951_h());
++        return this.func_77976_d() > 1 && (!(this.func_77984_f() && this.func_77951_h()) || CarpetSettings.allStackable > 1);
+     }
+ 
+     public boolean func_77984_f()
 @@ -334,7 +341,8 @@
  
          if (flag)

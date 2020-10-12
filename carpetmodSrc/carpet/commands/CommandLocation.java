@@ -6,6 +6,8 @@ import carpet.utils.DistanceCalculator;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
@@ -49,6 +51,8 @@ public class CommandLocation extends CommandCarpetBase
         int player_z = player.getPosition().getZ();
 
         sender.sendMessage(new TextComponentString(getDimensionWithColor(player) + " " + TextFormatting.WHITE + player.getName() + " is in " + player_x + " " + player_y + " " + player_z + " " + insideArea(player)));
+
+        player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 200, 0));
     }
 
     @Override

@@ -1,25 +1,65 @@
 --- ../src-base/minecraft/net/minecraft/server/management/PlayerList.java
 +++ ../src-work/minecraft/net/minecraft/server/management/PlayerList.java
-@@ -1,5 +1,6 @@
+@@ -1,17 +1,19 @@
  package net.minecraft.server.management;
  
 +import carpet.CarpetSettings;
  import com.google.common.collect.Lists;
  import com.google.common.collect.Maps;
  import com.google.common.collect.Sets;
-@@ -8,10 +9,7 @@
+ import com.mojang.authlib.GameProfile;
++import hippogriff.text.TextBuilder;
+ import io.netty.buffer.Unpooled;
++
++import java.awt.*;
  import java.io.File;
  import java.net.SocketAddress;
  import java.text.SimpleDateFormat;
--import java.util.List;
++import java.util.*;
+ import java.util.List;
 -import java.util.Map;
 -import java.util.Set;
 -import java.util.UUID;
-+import java.util.*;
  import javax.annotation.Nullable;
  import net.minecraft.advancements.CriteriaTriggers;
  import net.minecraft.advancements.PlayerAdvancements;
-@@ -65,6 +63,10 @@
+@@ -23,22 +25,7 @@
+ import net.minecraft.network.NetworkManager;
+ import net.minecraft.network.Packet;
+ import net.minecraft.network.PacketBuffer;
+-import net.minecraft.network.play.server.SPacketChangeGameState;
+-import net.minecraft.network.play.server.SPacketChat;
+-import net.minecraft.network.play.server.SPacketCustomPayload;
+-import net.minecraft.network.play.server.SPacketEntityEffect;
+-import net.minecraft.network.play.server.SPacketEntityStatus;
+-import net.minecraft.network.play.server.SPacketHeldItemChange;
+-import net.minecraft.network.play.server.SPacketJoinGame;
+-import net.minecraft.network.play.server.SPacketPlayerAbilities;
+-import net.minecraft.network.play.server.SPacketPlayerListItem;
+-import net.minecraft.network.play.server.SPacketRespawn;
+-import net.minecraft.network.play.server.SPacketServerDifficulty;
+-import net.minecraft.network.play.server.SPacketSetExperience;
+-import net.minecraft.network.play.server.SPacketSpawnPosition;
+-import net.minecraft.network.play.server.SPacketTeams;
+-import net.minecraft.network.play.server.SPacketTimeUpdate;
+-import net.minecraft.network.play.server.SPacketWorldBorder;
++import net.minecraft.network.play.server.*;
+ import net.minecraft.potion.PotionEffect;
+ import net.minecraft.scoreboard.ScoreObjective;
+ import net.minecraft.scoreboard.ScorePlayerTeam;
+@@ -49,10 +36,7 @@
+ import net.minecraft.stats.StatisticsManagerServer;
+ import net.minecraft.util.math.BlockPos;
+ import net.minecraft.util.math.MathHelper;
+-import net.minecraft.util.text.ChatType;
+-import net.minecraft.util.text.ITextComponent;
+-import net.minecraft.util.text.TextComponentTranslation;
+-import net.minecraft.util.text.TextFormatting;
++import net.minecraft.util.text.*;
+ import net.minecraft.world.DimensionType;
+ import net.minecraft.world.GameType;
+ import net.minecraft.world.World;
+@@ -65,6 +49,10 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  
@@ -30,7 +70,7 @@
  public abstract class PlayerList
  {
      public static final File field_152613_a = new File("banned-players.json");
-@@ -112,6 +114,8 @@
+@@ -112,6 +100,8 @@
          String s = gameprofile1 == null ? gameprofile.getName() : gameprofile1.getName();
          playerprofilecache.func_152649_a(gameprofile);
          NBTTagCompound nbttagcompound = this.func_72380_a(p_72355_2_);
@@ -39,7 +79,7 @@
          p_72355_2_.func_70029_a(this.field_72400_f.func_71218_a(p_72355_2_.field_71093_bK));
          p_72355_2_.field_71134_c.func_73080_a((WorldServer)p_72355_2_.field_70170_p);
          String s1 = "local";
-@@ -125,7 +129,8 @@
+@@ -125,7 +115,8 @@
          WorldServer worldserver = this.field_72400_f.func_71218_a(p_72355_2_.field_71093_bK);
          WorldInfo worldinfo = worldserver.func_72912_H();
          this.func_72381_a(p_72355_2_, (EntityPlayerMP)null, worldserver);
@@ -49,16 +89,24 @@
          nethandlerplayserver.func_147359_a(new SPacketJoinGame(p_72355_2_.func_145782_y(), p_72355_2_.field_71134_c.func_73081_b(), worldinfo.func_76093_s(), worldserver.field_73011_w.func_186058_p().func_186068_a(), worldserver.func_175659_aa(), this.func_72352_l(), worldinfo.func_76067_t(), worldserver.func_82736_K().func_82766_b("reducedDebugInfo")));
          nethandlerplayserver.func_147359_a(new SPacketCustomPayload("MC|Brand", (new PacketBuffer(Unpooled.buffer())).func_180714_a(this.func_72365_p().getServerModName())));
          nethandlerplayserver.func_147359_a(new SPacketServerDifficulty(worldinfo.func_176130_y(), worldinfo.func_176123_z()));
-@@ -343,6 +348,8 @@
+@@ -343,6 +334,16 @@
  
          worldserver.func_72838_d(p_72377_1_);
          this.func_72375_a(p_72377_1_, (WorldServer)null);
 +        //CM grabbing event of player logged in
 +        CarpetServer.playerConnected(p_72377_1_);
++
++        // Hippogriff SMP: Join messages
++
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getObfuscated("||", true), TextBuilder.getColored(" Bienvenido a ", TextFormatting.RED), TextBuilder.getColored("Hippogriff SMP ", TextFormatting.DARK_PURPLE), TextBuilder.getObfuscated("||", true), TextBuilder.getColored(" Welcome to ", TextFormatting.RED), TextBuilder.getColored("Hippogriff SMP ", TextFormatting.DARK_PURPLE), TextBuilder.getObfuscated("||", true)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Respeta a todos los miembros.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("Respect all members.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Aprovecha tu tiempo en las tareas que tienes asignadas.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("Take advantage of your time in the tasks that you have assigned.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Si no sabes utilizar un sistema, pide ayuda a otro miembro.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("If you don't know how to use a contraption, ask another member for help.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Todo se hace para el servidor. Llevalo a la cima.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("Everything is done for the server. Take it to the top.", TextFormatting.GOLD)));
      }
  
      public void func_72358_d(EntityPlayerMP p_72358_1_)
-@@ -352,6 +359,8 @@
+@@ -352,6 +353,8 @@
  
      public void func_72367_e(EntityPlayerMP p_72367_1_)
      {
@@ -67,7 +115,7 @@
          WorldServer worldserver = p_72367_1_.func_71121_q();
          p_72367_1_.func_71029_a(StatList.field_75947_j);
          this.func_72391_b(p_72367_1_);
-@@ -452,6 +461,11 @@
+@@ -452,6 +455,11 @@
  
          for (EntityPlayerMP entityplayermp1 : list)
          {
@@ -79,7 +127,7 @@
              entityplayermp1.field_71135_a.func_194028_b(new TextComponentTranslation("multiplayer.disconnect.duplicate_login", new Object[0]));
          }
  
-@@ -474,6 +488,7 @@
+@@ -474,6 +482,7 @@
          p_72368_1_.func_71121_q().func_73039_n().func_72787_a(p_72368_1_);
          p_72368_1_.func_71121_q().func_73039_n().func_72790_b(p_72368_1_);
          p_72368_1_.func_71121_q().func_184164_w().func_72695_c(p_72368_1_);
@@ -87,7 +135,7 @@
          this.field_72404_b.remove(p_72368_1_);
          this.field_72400_f.func_71218_a(p_72368_1_.field_71093_bK).func_72973_f(p_72368_1_);
          BlockPos blockpos = p_72368_1_.func_180470_cg();
-@@ -496,6 +511,7 @@
+@@ -496,6 +505,7 @@
          entityplayermp.func_145769_d(p_72368_1_.func_145782_y());
          entityplayermp.func_174817_o(p_72368_1_);
          entityplayermp.func_184819_a(p_72368_1_.func_184591_cq());
@@ -95,7 +143,7 @@
  
          for (String s : p_72368_1_.func_184216_O())
          {
-@@ -560,7 +576,11 @@
+@@ -560,7 +570,11 @@
          WorldServer worldserver1 = this.field_72400_f.func_71218_a(p_187242_1_.field_71093_bK);
          p_187242_1_.field_71135_a.func_147359_a(new SPacketRespawn(p_187242_1_.field_71093_bK, p_187242_1_.field_70170_p.func_175659_aa(), p_187242_1_.field_70170_p.func_72912_H().func_76067_t(), p_187242_1_.field_71134_c.func_73081_b()));
          this.func_187243_f(p_187242_1_);
@@ -108,7 +156,7 @@
          p_187242_1_.field_70128_L = false;
          this.func_82448_a(p_187242_1_, i, worldserver, worldserver1);
          this.func_72375_a(p_187242_1_, worldserver);
-@@ -630,6 +650,12 @@
+@@ -630,6 +644,12 @@
              }
          }
  
@@ -121,7 +169,7 @@
          p_82448_3_.field_72984_F.func_76319_b();
  
          if (p_82448_2_ != 1)
-@@ -1097,4 +1123,26 @@
+@@ -1097,4 +1117,26 @@
              playeradvancements.func_193766_b();
          }
      }

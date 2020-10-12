@@ -26,6 +26,9 @@ import carpet.utils.TickingArea;
 import carpet.worldedit.WorldEditBridge;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.ChunkPos;
@@ -45,7 +48,7 @@ public class CarpetSettings
 
     // TODO: replace these constants at build time
     public static final String carpetVersion = "v20_09_08";
-    public static final String hippogriffVersion = "1.1.0";
+    public static final String hippogriffVersion = "20.10.12.0 (Shota Control Update)";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -55,6 +58,25 @@ public class CarpetSettings
     public static long endChunkSeed = 0;
 
     /** Hippogriff SMP Settings */
+
+    @Rule(desc = "Warn that a dangerous action has occurred.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean warnLogs = false;
+
+    @Rule(desc = "Kick players when they attack others with more than half a heart.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean antiPVP = false;
+
+    @Rule(desc = "Burn concrete powder to get stained glass. Requires restart.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean concreteGlass = false;
+
+    @Rule(desc = "Overrides max stack size of all items", category = {HIPPOGRIFF, CREATIVE, FEATURE}, options = {"0", "1", "16", "64"}, validator = "validateStackable")
+    public static int allStackable = 0;
+
+    private static boolean validateStackable(int value) {
+        return value >= 0;
+    }
+
+    @Rule(desc = "Can put shulkers inside shulkers", category = {HIPPOGRIFF, CREATIVE, FEATURE})
+    public static boolean shulkerInShulker = false;
 
     @Rule(desc = "Click on dragon eggs action", category = {HIPPOGRIFF, SURVIVAL, FEATURE}, options = {"teleport", "destroy", "remove", "ignore"}, validator = "validateDragonClick")
     public static String dragonEggClick = "teleport";
@@ -69,22 +91,22 @@ public class CarpetSettings
     @Rule(desc = "Destroy bedrock with dragon eggs in entity processing chunks", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
     public static boolean easyBedrock = false;
 
-    @Rule(desc = "Charged creepers allways drop skulls", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    @Rule(desc = "Charged creepers allways drop skulls", category = {HIPPOGRIFF, CREATIVE, FEATURE})
     public static boolean alwaysSkull = false;
 
-    @Rule(desc = "October 31 pumpkins", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    @Rule(desc = "October 31 pumpkins", category = {HIPPOGRIFF, CREATIVE, FEATURE})
     public static boolean oct31 = false;
 
-    @Rule(desc = "Block drops spawns at player if sneaking", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    @Rule(desc = "Block drops spawns at player if not sneaking", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
     public static boolean safeMining = false;
 
-    @Rule(desc = "Enable enderpearls colliding with TNT", category = {HIPPOGRIFF, TNT, FEATURE})
+    @Rule(desc = "Enable enderpearls colliding with TNT", category = {HIPPOGRIFF, TNT, CREATIVE})
     public static boolean enderpearlTntCollision = true;
 
     @Rule(desc = "Enables infinite trades uses", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
     public static boolean infiniteTrades = false;
 
-    @Rule(desc = "Entities teleports instantly through EndGateways", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    @Rule(desc = "Entities teleports instantly through EndGateways", category = {HIPPOGRIFF, CREATIVE, FEATURE})
     public static boolean gatewayNoCooldown = false;
 
     @Rule(desc = "Enables /center command", category = {HIPPOGRIFF, COMMANDS})
@@ -1375,8 +1397,15 @@ public class CarpetSettings
         {
             if (!set(key, conf.get(key)))
                 LOG.error("[CM]: The value of " + conf.get(key) + " for " + key + " is not valid - ignoring...");
-            else
-                LOG.info("[CM]: loaded setting "+key+" as "+conf.get(key)+" from carpet.conf");
+            else {
+                LOG.info("[CM]: loaded setting " + key + " as " + conf.get(key) + " from carpet.conf");
+
+                if (key.equals("concreteGlass") && (conf.get(key).equals("true"))) {
+                    for (int i = 0; i < 16; i++) {
+                        FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(Blocks.CONCRETE_POWDER, 1, i), new ItemStack(Blocks.STAINED_GLASS, 1, i), 0.1F);
+                    }
+                }
+            }
         }
         locked = is_locked;
     }

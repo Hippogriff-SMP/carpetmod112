@@ -1,6 +1,23 @@
 --- ../src-base/minecraft/net/minecraft/item/Item.java
 +++ ../src-work/minecraft/net/minecraft/item/Item.java
-@@ -991,4 +991,9 @@
+@@ -1,5 +1,6 @@
+ package net.minecraft.item;
+ 
++import carpet.CarpetSettings;
+ import com.google.common.collect.HashMultimap;
+ import com.google.common.collect.Maps;
+ import com.google.common.collect.Multimap;
+@@ -161,7 +162,8 @@
+ 
+     public int func_77639_j()
+     {
+-        return this.field_77777_bU;
++        //Hippogriff SMP AllStackable
++        return CarpetSettings.allStackable == 0 ? this.field_77777_bU : CarpetSettings.allStackable;
+     }
+ 
+     public int func_77647_b(int p_77647_1_)
+@@ -991,4 +993,9 @@
              }
          }
      }

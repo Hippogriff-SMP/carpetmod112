@@ -184,7 +184,7 @@
  
 +        if (p_180657_4_.func_177230_c().func_176223_P().toString().contains("shulker_box")) return;
 +
-+        boolean safeMined = CarpetSettings.safeMining && p_180657_2_.func_70093_af();
++        boolean safeMined = CarpetSettings.safeMining && !p_180657_2_.func_70093_af();
 +        if (safeMined) p_180657_3_ = p_180657_2_.func_180425_c();
 +
          if (this.func_149700_E() && EnchantmentHelper.func_77506_a(Enchantments.field_185306_r, p_180657_6_) > 0)

@@ -76,10 +76,10 @@ sourceSets {
 		}
 	}
 }
-File runningDir = new File('server/')
+File runningDir = new File('server_test/')
 runningDir.mkdirs()
 tasks.run.workingDir = runningDir
-//tasks.run.args = ['nogui'] // add this to remove server gui
+tasks.run.args = ['nogui'] // add this to remove server gui
 // ForgeGradle settings
 minecraft
 {
