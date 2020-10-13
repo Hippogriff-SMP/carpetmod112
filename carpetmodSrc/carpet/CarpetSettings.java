@@ -48,7 +48,7 @@ public class CarpetSettings
 
     // TODO: replace these constants at build time
     public static final String carpetVersion = "v20_09_08";
-    public static final String hippogriffVersion = "20.10.12.0 (Shota Control Update)";
+    public static final String hippogriffVersion = "20.10.13.0 (Shota Control Update)";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -60,6 +60,9 @@ public class CarpetSettings
     /** Hippogriff SMP Settings */
 
     @Rule(desc = "Warn that a dangerous action has occurred.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean feFarming = false;
+
+    @Rule(desc = "Warn that a dangerous action has occurred.", category = {HIPPOGRIFF, FEATURE})
     public static boolean warnLogs = false;
 
     @Rule(desc = "Kick players when they attack others with more than half a heart.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
@@ -97,7 +100,7 @@ public class CarpetSettings
     @Rule(desc = "October 31 pumpkins", category = {HIPPOGRIFF, CREATIVE, FEATURE})
     public static boolean oct31 = false;
 
-    @Rule(desc = "Block drops spawns at player if not sneaking", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    @Rule(desc = "Block drops spawns at player", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
     public static boolean safeMining = false;
 
     @Rule(desc = "Enable enderpearls colliding with TNT", category = {HIPPOGRIFF, TNT, CREATIVE})

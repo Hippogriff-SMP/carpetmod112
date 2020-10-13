@@ -1,17 +1,19 @@
 --- ../src-base/minecraft/net/minecraft/item/ItemEndCrystal.java
 +++ ../src-work/minecraft/net/minecraft/item/ItemEndCrystal.java
-@@ -1,17 +1,25 @@
+@@ -1,17 +1,27 @@
  package net.minecraft.item;
  
  import java.util.List;
 +
 +import carpet.CarpetSettings;
++import hippogriff.logger.ShotaWarn;
 +import hippogriff.text.TextBuilder;
  import net.minecraft.block.state.IBlockState;
  import net.minecraft.creativetab.CreativeTabs;
  import net.minecraft.entity.Entity;
  import net.minecraft.entity.item.EntityEnderCrystal;
  import net.minecraft.entity.player.EntityPlayer;
++import net.minecraft.entity.player.EntityPlayerMP;
  import net.minecraft.init.Blocks;
 +import net.minecraft.network.play.server.SPacketChat;
 +import net.minecraft.server.MinecraftServer;
@@ -26,14 +28,13 @@
  import net.minecraft.world.World;
  import net.minecraft.world.WorldProviderEnd;
  import net.minecraft.world.end.DragonFightManager;
-@@ -66,6 +74,11 @@
+@@ -66,6 +76,10 @@
                      {
                          if (!p_180614_2_.field_72995_K)
                          {
 +                            //Hippogriff SMP: Log EnderCrystals
-+                            if (p_180614_1_.func_184102_h() != null && CarpetSettings.warnLogs) {
-+                                p_180614_1_.func_184102_h().func_184103_al().func_148539_a(TextBuilder.getColored(p_180614_1_.func_145748_c_() + " ha colocado un EnderCrystal en " + p_180614_3_.toString() + " / " + p_180614_1_.func_145748_c_() + " has placed an EnderCrystal in " + p_180614_3_.toString(), TextFormatting.RED));
-+                            }
++                            if (p_180614_1_.func_184102_h() != null && CarpetSettings.warnLogs)
++                                ShotaWarn.warn((EntityPlayerMP) p_180614_1_, p_180614_3_.toString(), "ha colocado un EnderCrystal en", "has placed an EnderCrystal in");
 +
                              EntityEnderCrystal entityendercrystal = new EntityEnderCrystal(p_180614_2_, (double)((float)p_180614_3_.func_177958_n() + 0.5F), (double)(p_180614_3_.func_177956_o() + 1), (double)((float)p_180614_3_.func_177952_p() + 0.5F));
                              entityendercrystal.func_184517_a(false);

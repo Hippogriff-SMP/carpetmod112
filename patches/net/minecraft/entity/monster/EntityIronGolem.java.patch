@@ -1,0 +1,46 @@
+--- ../src-base/minecraft/net/minecraft/entity/monster/EntityIronGolem.java
++++ ../src-work/minecraft/net/minecraft/entity/monster/EntityIronGolem.java
+@@ -1,5 +1,6 @@
+ package net.minecraft.entity.monster;
+ 
++import carpet.CarpetSettings;
+ import com.google.common.base.Predicate;
+ import javax.annotation.Nullable;
+ import net.minecraft.block.Block;
+@@ -79,8 +80,16 @@
+         this.field_70180_af.func_187214_a(field_184750_a, Byte.valueOf((byte)0));
+     }
+ 
++    //Hippogriff SMP: Spawned
++    private boolean farmed() {
++        return CarpetSettings.feFarming && (func_70090_H() || func_180799_ab());
++    }
++
+     protected void func_70619_bc()
+     {
++        if (farmed())
++            return;
++
+         if (--this.field_70858_e <= 0)
+         {
+             this.field_70858_e = 70 + this.field_70146_Z.nextInt(50);
+@@ -115,6 +124,9 @@
+ 
+     protected void func_82167_n(Entity p_82167_1_)
+     {
++        if (farmed())
++            return;
++
+         if (p_82167_1_ instanceof IMob && !(p_82167_1_ instanceof EntityCreeper) && this.func_70681_au().nextInt(20) == 0)
+         {
+             this.func_70624_b((EntityLivingBase)p_82167_1_);
+@@ -127,6 +139,9 @@
+     {
+         super.func_70636_d();
+ 
++        if (farmed())
++            return;
++
+         if (this.field_70855_f > 0)
+         {
+             --this.field_70855_f;

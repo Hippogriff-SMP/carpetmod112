@@ -7,27 +7,27 @@ import net.minecraft.util.text.TextFormatting;
 
 public class TextBuilder {
 
-    public static ITextComponent mergeTextComponents(TextComponentBase... components) {
-        TextComponentBase base = new TextComponentString("");
-        for (TextComponentBase component: components) {
+    public static ITextComponent mergeTextComponents(ITextComponent... components) {
+        ITextComponent base = new TextComponentString("");
+        for (ITextComponent component: components) {
             base.appendSibling(component);
         }
         return ITextComponent.Serializer.jsonToComponent(ITextComponent.Serializer.componentToJson(base));
     }
 
-    public static TextComponentBase getColored(String text, TextFormatting color) {
+    public static ITextComponent getColored(String text, TextFormatting color) {
         TextComponentBase component = new TextComponentString(text);
         component.getStyle().setColor(color);
         return component;
     }
 
-    public static TextComponentBase getBolded(String text, boolean bold) {
+    public static ITextComponent getBolded(String text, boolean bold) {
         TextComponentBase component = new TextComponentString(text);
         component.getStyle().setBold(bold);
         return component;
     }
 
-    public static TextComponentBase getObfuscated(String text, boolean bold) {
+    public static ITextComponent getObfuscated(String text, boolean bold) {
         TextComponentBase component = new TextComponentString(text);
         component.getStyle().setObfuscated(bold);
         return component;

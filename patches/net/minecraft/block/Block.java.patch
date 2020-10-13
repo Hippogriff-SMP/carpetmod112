@@ -171,7 +171,7 @@
      protected void func_180637_b(World p_180637_1_, BlockPos p_180637_2_, int p_180637_3_)
      {
          if (!p_180637_1_.field_72995_K && p_180637_1_.func_82736_K().func_82766_b("doTileDrops"))
-@@ -594,18 +619,26 @@
+@@ -594,18 +619,25 @@
  
      public void func_180657_a(World p_180657_1_, EntityPlayer p_180657_2_, BlockPos p_180657_3_, IBlockState p_180657_4_, @Nullable TileEntity p_180657_5_, ItemStack p_180657_6_)
      {
@@ -184,24 +184,23 @@
  
 +        if (p_180657_4_.func_177230_c().func_176223_P().toString().contains("shulker_box")) return;
 +
-+        boolean safeMined = CarpetSettings.safeMining && !p_180657_2_.func_70093_af();
-+        if (safeMined) p_180657_3_ = p_180657_2_.func_180425_c();
++        if (CarpetSettings.safeMining) p_180657_3_ = p_180657_2_.func_180425_c();
 +
          if (this.func_149700_E() && EnchantmentHelper.func_77506_a(Enchantments.field_185306_r, p_180657_6_) > 0)
          {
              ItemStack itemstack = this.func_180643_i(p_180657_4_);
 -            func_180635_a(p_180657_1_, p_180657_3_, itemstack);
-+            spawnAsEntity(p_180657_1_, p_180657_3_, itemstack, safeMined);
++            spawnAsEntity(p_180657_1_, p_180657_3_, itemstack, CarpetSettings.safeMining);
          }
          else
          {
              int i = EnchantmentHelper.func_77506_a(Enchantments.field_185308_t, p_180657_6_);
 -            this.func_176226_b(p_180657_1_, p_180657_3_, p_180657_4_, i);
-+            this.dropBlockAsItem(p_180657_1_, p_180657_3_, p_180657_4_, i, safeMined);
++            this.dropBlockAsItem(p_180657_1_, p_180657_3_, p_180657_4_, i, CarpetSettings.safeMining);
          }
      }
  
-@@ -849,7 +882,8 @@
+@@ -849,7 +881,8 @@
          func_176219_a(32, "deadbush", (new BlockDeadBush()).func_149711_c(0.0F).func_149672_a(SoundType.field_185850_c).func_149663_c("deadbush"));
          func_176219_a(33, "piston", (new BlockPistonBase(false)).func_149663_c("pistonBase"));
          func_176219_a(34, "piston_head", (new BlockPistonExtension()).func_149663_c("pistonBase"));
