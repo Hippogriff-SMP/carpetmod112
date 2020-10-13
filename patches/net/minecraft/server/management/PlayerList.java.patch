@@ -98,11 +98,11 @@
 +
 +        // Hippogriff SMP: Join messages
 +
-+        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getObfuscated("||", true), TextBuilder.getColored(" Bienvenido a ", TextFormatting.RED), TextBuilder.getColored("Hippogriff SMP ", TextFormatting.DARK_PURPLE), TextBuilder.getObfuscated("||", true), TextBuilder.getColored(" Welcome to ", TextFormatting.RED), TextBuilder.getColored("Hippogriff SMP ", TextFormatting.DARK_PURPLE), TextBuilder.getObfuscated("||", true)));
-+        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Respeta a todos los miembros.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("Respect all members.", TextFormatting.GOLD)));
-+        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Aprovecha tu tiempo en las tareas que tienes asignadas.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("Take advantage of your time in the tasks that you have assigned.", TextFormatting.GOLD)));
-+        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Si no sabes utilizar un sistema, pide ayuda a otro miembro.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("If you don't know how to use a contraption, ask another member for help.", TextFormatting.GOLD)));
-+        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("- Todo se hace para el servidor. Llevalo a la cima.", TextFormatting.GREEN), TextBuilder.getColored(" / ", TextFormatting.WHITE), TextBuilder.getColored("Everything is done for the server. Take it to the top.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getObfuscated("||", true), TextBuilder.getColored(" Welcome to ", TextFormatting.RED), TextBuilder.getColored("Hippogriff SMP ", TextFormatting.DARK_PURPLE), TextBuilder.getObfuscated("||", true)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("Respect all members.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("Take advantage of your time in the tasks that you have assigned.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("If you don't know how to use a contraption, ask another member for help.", TextFormatting.GOLD)));
++        p_72377_1_.func_145747_a(TextBuilder.mergeTextComponents(TextBuilder.getColored("Everything is done for the server. Take it to the top.", TextFormatting.GOLD)));
      }
  
      public void func_72358_d(EntityPlayerMP p_72358_1_)

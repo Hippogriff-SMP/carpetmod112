@@ -205,7 +205,7 @@
 +                        if (CarpetSettings.antiPVP && p_70097_2_ >= 2) {
 +                            ((EntityPlayerMP) entity).field_71135_a.func_194028_b(TextBuilder.mergeTextComponents(TextBuilder.getColored("AntiPVP catch you!", TextFormatting.RED), new TextComponentString(" Stop attacking players & rejoin.")));
 +                            if (func_184102_h() != null && CarpetSettings.warnLogs)
-+                                ShotaWarn.warn(((EntityPlayerMP) entity), this, "ha atacado a", "attacked");
++                                ShotaWarn.warn(((EntityPlayerMP) entity), this, "attacked");
 +                            return false;
 +                        }
                      }
