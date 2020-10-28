@@ -103,7 +103,29 @@
                      else
                      {
                          itemstack1.func_190917_f(itemstack.func_190916_E());
-@@ -256,6 +300,8 @@
+@@ -233,20 +277,9 @@
+                         return true;
+                     }
+                 }
+-                else
+-                {
+-                    return false;
+-                }
+             }
+-            else
+-            {
+-                return false;
+-            }
+         }
+-        else
+-        {
+-            return false;
+-        }
++        return false;
+     }
+ 
+     public void func_70288_d()
+@@ -256,6 +289,8 @@
  
      public boolean func_70072_I()
      {
@@ -112,7 +134,7 @@
          if (this.field_70170_p.func_72918_a(this.func_174813_aQ(), Material.field_151586_h, this))
          {
              if (!this.field_70171_ac && !this.field_70148_d)
-@@ -269,7 +315,8 @@
+@@ -269,7 +304,8 @@
          {
              this.field_70171_ac = false;
          }
@@ -122,7 +144,7 @@
          return this.field_70171_ac;
      }
  
-@@ -295,6 +342,15 @@
+@@ -295,6 +331,15 @@
  
              if (this.field_70291_e <= 0)
              {
@@ -138,7 +160,7 @@
                  this.func_70106_y();
              }
  
-@@ -366,6 +422,10 @@
+@@ -366,6 +411,10 @@
              Item item = itemstack.func_77973_b();
              int i = itemstack.func_190916_E();
  
@@ -149,7 +171,7 @@
              if (this.field_145804_b == 0 && (this.field_145802_g == null || 6000 - this.field_70292_b <= 200 || this.field_145802_g.equals(p_70100_1_.func_70005_c_())) && p_70100_1_.field_71071_by.func_70441_a(itemstack))
              {
                  p_70100_1_.func_71001_a(this, i);
-@@ -376,8 +436,13 @@
+@@ -376,8 +425,13 @@
                      itemstack.func_190920_e(i);
                  }
  
@@ -164,7 +186,7 @@
          }
      }
  
-@@ -470,4 +535,9 @@
+@@ -470,4 +524,9 @@
          this.func_174871_r();
          this.field_70292_b = 5999;
      }

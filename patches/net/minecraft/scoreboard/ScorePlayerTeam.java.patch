@@ -1,0 +1,20 @@
+--- ../src-base/minecraft/net/minecraft/scoreboard/ScorePlayerTeam.java
++++ ../src-work/minecraft/net/minecraft/scoreboard/ScorePlayerTeam.java
+@@ -58,7 +58,7 @@
+ 
+     public String func_96668_e()
+     {
+-        return this.field_96674_e;
++        return (this.field_96674_e + "[" + this.field_96673_d + "]").split(" ")[0] + " ";
+     }
+ 
+     public void func_96666_b(String p_96666_1_)
+@@ -87,7 +87,7 @@
+ 
+     public String func_142053_d(String p_142053_1_)
+     {
+-        return this.func_96668_e() + p_142053_1_ + this.func_96663_f();
++        return this.func_96668_e() + p_142053_1_ + this.func_96663_f() + TextFormatting.RESET.toString(); //Hippogriff SMP: Prefix Suffix colors
+     }
+ 
+     public static String func_96667_a(@Nullable Team p_96667_0_, String p_96667_1_)

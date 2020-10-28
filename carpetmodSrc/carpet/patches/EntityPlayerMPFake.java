@@ -71,6 +71,7 @@ public class EntityPlayerMPFake extends EntityPlayerMP
         server.getPlayerList().serverUpdateMovingPlayer(instance);
         instance.dataManager.set(PLAYER_MODEL_FLAG, (byte) 0x7f); // show all model layers (incl. capes)
         createAndAddFakePlayerToTeamBot(instance);
+
         return instance;
     }
 

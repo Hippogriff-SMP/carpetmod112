@@ -59,6 +59,9 @@ public class CarpetSettings
 
     /** Hippogriff SMP Settings */
 
+    @Rule(desc = "Total score count.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean totalScore = false;
+
     @Rule(desc = "Warn that a dangerous action has occurred.", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
     public static boolean feFarming = false;
 
@@ -100,8 +103,11 @@ public class CarpetSettings
     @Rule(desc = "October 31 pumpkins", category = {HIPPOGRIFF, CREATIVE, FEATURE})
     public static boolean oct31 = false;
 
-    @Rule(desc = "Block drops spawns at player", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
-    public static boolean safeMining = false;
+    @Rule(desc = "Items not have pickup delay. Only works with itemMagnet=true", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean instantItem = false;
+
+    @Rule(desc = "Items teleport to player with diamon pickaxe in main hand", category = {HIPPOGRIFF, SURVIVAL, FEATURE})
+    public static boolean itemMagnet = false;
 
     @Rule(desc = "Enable enderpearls colliding with TNT", category = {HIPPOGRIFF, TNT, CREATIVE})
     public static boolean enderpearlTntCollision = true;

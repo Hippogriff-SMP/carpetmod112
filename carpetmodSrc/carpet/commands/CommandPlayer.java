@@ -2,6 +2,7 @@ package carpet.commands;
 
 import carpet.CarpetSettings;
 import carpet.patches.EntityPlayerMPFake;
+import hippogriff.io.FileHelper;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -13,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -183,7 +186,10 @@ public class CommandPlayer extends CommandCarpetBase
                     throw new CommandException("You are not allowed to spawn a creative player");
                 }
             }
-            EntityPlayerMPFake.createFake(playerName, server, d0, d1, d2, yaw, pitch, dimension, gamemode );
+            if (getAvailableNames(server).contains(playerName))
+                EntityPlayerMPFake.createFake(playerName, server, d0, d1, d2, yaw, pitch, dimension, gamemode );
+            else
+                throw new CommandException("This name is not a valid registered bot in the list");
             return;
         }
         if ("kill".equalsIgnoreCase(action))
@@ -324,9 +330,7 @@ public class CommandPlayer extends CommandCarpetBase
         }
         if (args.length == 1)
         {
-            Set<String> players = new HashSet<>(Arrays.asList(server.getOnlinePlayerNames()));
-            players.add("Steve");
-            players.add("Alex");
+            Set<String> players = getAvailableNames(server);
             return getListOfStringsMatchingLastWord(args, players.toArray(new String[0]));
         }
         if (args.length == 2)
@@ -375,5 +379,15 @@ public class CommandPlayer extends CommandCarpetBase
             }
         }
         return Collections.emptyList();
+    }
+
+    private Set<String> getAvailableNames(MinecraftServer server) {
+        Set<String> players = new HashSet<>(Arrays.asList(server.getOnlinePlayerNames()));
+        try {
+            players.addAll(FileHelper.loadConfig("bots.txt")); //Hippogriff SMP: bots with fixed names
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return players;
     }
 }
